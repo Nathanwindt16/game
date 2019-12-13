@@ -4,7 +4,7 @@ BACKGROUND_COLOR = pygame.Color('white')  # The background colod of our window
 FPS = 100  # Frames per second
 
 
-
+print("random change to check commit")
 
 class MySprite(pygame.sprite.Sprite):
     def __init__(self):
