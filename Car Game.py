@@ -45,17 +45,18 @@ def car (display, x,y) :
     pygame.display.update()
 
 
-def gameintro(game_state):
-    while game_state == INTRO:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                game_state = GAME
-        gd.fill(black)
-        gd.blit(background, (0, 0))
-        pygame.display.update()
-        pygame.time.delay(5000)
-        game_state = GAME
-    game_loop(game_state)
+def game_intro():
+  gd.blit('Intro_Background/background_1.jpg', 0, 0)
+  gameintro=False
+  while gameintro==False:
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            gameintro = True
+            game_over=True
+
+    window_width = 800
+    window_hight = 600
 
 
 def game_loop(game_state):
@@ -86,7 +87,7 @@ def game_loop(game_state):
         clock.tick(60)
         pygame.display.update()
 
-gameintro(INTRO)
+game_intro()
 
 pygame.quit()
 quit()
