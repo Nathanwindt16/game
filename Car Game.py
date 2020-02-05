@@ -4,7 +4,11 @@ import pygame
 import time
 import sys
 import random
+
 pygame.init()
+
+#GLOBALS
+
 #color
 gray=(119,118,110)
 white=(255,255,255)
@@ -14,29 +18,57 @@ green=(0,200,0)
 blue=(0,0,255)
 bright_red=(255,0,0)
 bright_green=(0,255,0)
-window_width=800
-window_hight=600
+
+#GAMESTATE
+INTRO = 1
+MENU = 2
+GAME = 3
+GAMEOVER = 4
+QUIT = 0
+
+window_width=1332
+window_height=700
+
 #display surface
-gd = pygame.display.set_mode([window_width, window_width])
+background = pygame.image.load('Intro_Background/background_1.jpg')
 carimg =pygame.image.load('Car_Images/Topdown_vehicle_sprites_pack/Car.png')
 car1=pygame.transform.scale(carimg, (100,100))
+
+print(window_width, window_height)
+
+gd = pygame.display.set_mode([window_width, window_height])
 clock = pygame.time.Clock()
 
-def car (x,y) :
-    gd.blit(car1, (x, y))
+
+def car (display, x,y) :
+    display.blit(car1, (x, y))
     pygame.display.update()
 
-def gameloop() :
+
+def gameintro(game_state):
+    while game_state == INTRO:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_state = GAME
+        gd.fill(black)
+        gd.blit(background, (0, 0))
+        pygame.display.update()
+        pygame.time.delay(5000)
+        game_state = GAME
+    game_loop(game_state)
+
+
+def game_loop(game_state):
+    game_state = INTRO
     x_change = 0
     y_lead = 0
     x = 300
     y = 490
     block = 10
-    game_over = False
-    while game_over == False:
+    while game_state != QUIT:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                game_over= True
+                game_state = QUIT
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     x_change = -block
@@ -47,11 +79,14 @@ def gameloop() :
                     x_change = 0
 
         x += x_change
+
         gd.fill(black)
-        car(x,y)
+        car(gd, x,y)
 
         clock.tick(60)
         pygame.display.update()
 
+gameintro(INTRO)
 
-gameloop()
+pygame.quit()
+quit()
