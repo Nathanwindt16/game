@@ -4,7 +4,7 @@ import sys
 import random
 pygame.init()
 #color
-gray=(119,118,110)
+gray=(168,169,173)
 white=(255,255,255)
 black=(0,0,0)
 red=(200,0,0)
@@ -76,7 +76,7 @@ def game_intro():
   pygame.display.update()
 
 def back():
-    blue_strip=pygame.image.load("Car_Images/Topdown_vehicle_sprites_pack/mini_truck.png")
+    blue_strip=pygame.image.load("Background/Capture.PNG")
     img=pygame.transform.scale(blue_strip,(100,600))
     gd.blit(img,(0,0))
     gd.blit(img,(700,0))
